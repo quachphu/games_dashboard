@@ -1,9 +1,6 @@
 import streamlit as st
 import altair as alt
-from vega_datasets import data
 import pandas as pd
-from numerize import numerize
-from datetime import datetime
 
 st.set_page_config(
     page_title='PC: Platform Terpopuler Perilisan Game Sepanjang Masa',
