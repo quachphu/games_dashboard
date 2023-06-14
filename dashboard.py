@@ -1,3 +1,6 @@
+import sys
+sys.path.insert(1, "site-packages/streamlit_option_menu")
+
 import streamlit as st
 import altair as alt
 import pandas as pd
