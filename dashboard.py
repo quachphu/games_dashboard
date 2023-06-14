@@ -1,7 +1,7 @@
 import sys
 import subprocess
-# sys.path.insert(1, "site-packages/streamlit_option_menu")
-subprocess.check_call([sys.executable, "-m", "pip", "install", 'streamlit_option_menu'])
+# installing new package here because requirements.txt for streamlit_option_menu has error with dependency 
+subprocess.check_call([sys.executable, "-m", "pip", "install", 'streamlit_option_menu']) 
 
 import streamlit as st
 import altair as alt
