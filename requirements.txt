@@ -1,5 +1,6 @@
 pycaret==3.0.0rc3
-streamlit==1.23.1
 altair==5.0.1
-pandas==2.0.2
-streamlit-option-menu==0.3.6
+numpy==1.21.6
+pandas==1.4.3
+streamlit==1.11.0
+streamlit_option_menu==0.3.2
