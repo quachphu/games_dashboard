@@ -7,7 +7,6 @@ if name in sys.modules:
 else:
     subprocess.check_call([sys.executable, "-m", "pip", "install", 'streamlit_option_menu']) 
 
-
 import streamlit as st
 import altair as alt
 import pandas as pd
