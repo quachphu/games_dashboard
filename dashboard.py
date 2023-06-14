@@ -1,7 +1,7 @@
 import sys
 import subprocess
 # installing new package here because requirements.txt for streamlit_option_menu has error with dependency 
-name = ['streamlit_option_menu']
+name = 'streamlit_option_menu'
 if name in sys.modules:
     print(f"{name!r} already in sys.modules")
 else:
