@@ -137,6 +137,15 @@ if selected == 'Home':
     '''
     st.markdown(batasan)
 
+    # ========= Daftar Pustaka =========
+    st.markdown('<h2>Daftar Pustaka</h2>', unsafe_allow_html=True)
+    dafpus = '''
+        1. https://www.ijert.org/research/comparative-study-of-pc-and-gaming-console-for-video-games-IJERTCONV8IS05060.pdf
+        2. https://www.businessinsider.com/reasons-why-pc-gamers-prefer-pc-2015-11
+        3. https://www.statista.com/statistics/420621/number-of-pc-gamers/
+    '''
+    st.markdown(dafpus)
+
 elif selected == 'Data Collecting':
     # ========= Data Collecting Process =========
     st.markdown('<h2>Data Collecting Process</h2>', unsafe_allow_html=True)
