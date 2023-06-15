@@ -120,11 +120,9 @@ if selected == 'Home':
     st.markdown('<h2>Rumusan Masalah</h2>', unsafe_allow_html=True)
     
     rumusan = '''
-        1. Apakah orang memilih PC untuk bermain game karena PC memiliki banyak game online?
-        2. Apakah orang memilih PC untuk bermain game karena game PC sering terlebih dahulu dirilis daripada game pada konsol gaming?
-        3. Jika game di rilis di beberapa platform sekaligus, apakah skor ulasan (metascore & userscore) game yang dirilis di PC lebih tinggi daripada platform lain?
-        4. Apa platform yang paling sering dipakai untuk merilis game dalam 5 tahun ke belakang?
-        5. Berapa nilai rata-rata skor ulasan (metascore) game untuk setiap platform? 
+        1. Apa platform yang paling sering dipakai untuk merilis game dalam 5 tahun ke belakang?
+        2. Seberapa banyak game online yang ada di PC?
+        3. Berapa nilai rata-rata skor ulasan (metascore) game untuk setiap platform? 
     '''
     st.markdown(rumusan)
 
@@ -364,6 +362,21 @@ elif selected == 'Analysis':
     st.caption('Grafik di atas menunjukkan bahwa platform PC, PlayStation 4, PlayStation 5, dan Switch mendominasi dalam perilisan game dengan menempati posisi teratas. Perlu dicatat bahwa PlayStation 4, yang sebelumnya menjadi salah satu platform utama yang menggunakan konsol, telah digantikan oleh generasi terbarunya, yaitu PlayStation 5. Sejak tahun 2022, jumlah perilisan game untuk PlayStation 5 mulai meningkat, meskipun platform tersebut sudah dirilis sejak tahun 2020.')
 
     "\n\n"
+
+    # RUMUSAN 1
+    df_online = df.groupby('platform')['is_online'].sum().reset_index()
+    # Create the bar chart using Altair
+    chart = alt.Chart(df_online).mark_bar().encode(
+        x=alt.X('platform', sort='-y'),
+        y='is_online',
+        tooltip=['platform', 'is_online']
+    ).properties(
+        title='Jumlah Game Online per Platform'
+    )
+    st.altair_chart(chart, use_container_width=True)
+    st.caption('Grafik di atas menunjukkan bahwa game online banyak tersedia pada PC, lalu diikuti oleh PlayStation 4, Nintendo Switch, dan berbagai platform gaming lainnya. Jika melihat 5 platform teratas dalam segi banyaknya jumlah game online, PlayStation 5 sebagai platform yang populer pada grafik sebelumnya ternyata masih kurang unggul daripada platform seperti XBOX dari segi jumlah game online yang tersedia.')
+
+    "\n\n\n\n"
 
     # Filter data for the selected platforms
     selected_platforms = ['PC', 'PlayStation 4', 'PlayStation 5', 'Switch']
