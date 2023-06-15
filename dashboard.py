@@ -12,6 +12,8 @@ import altair as alt
 import pandas as pd
 from PIL import Image
 from streamlit_option_menu import option_menu
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 st.set_page_config(
     page_title='PC: Platform Terpopuler Perilisan Game Sepanjang Masa',
@@ -20,7 +22,7 @@ st.set_page_config(
 
 selected = option_menu(
     None, 
-    ["Home", "Data Collecting",  "Data Overview", 'Analysis'], 
+    ["Home", "Data Collecting",  "Data Preview", 'Analysis'], 
     icons=['house', 'arrows-angle-contract', "eye", 'graph-up'], 
     menu_icon="cast", default_index=0, orientation="horizontal",
     styles={
@@ -35,6 +37,11 @@ st.markdown("<h1 style='text-align: center;'>PC: Platform Terpopuler Perilisan G
 st.markdown("<h6 style='text-align: center; color: grey;'>Data Source: Metascrap (Scraped on June 9, 2023)</h6>", unsafe_allow_html=True)
 
 "\n\n"
+
+df = pd.read_csv('data/metacritic_scrap.csv')
+df['id'] = df['id'].astype('object')
+df['release_date'] = pd.to_datetime(df['release_date'])
+df['is_online'] = df['is_online'].astype('object')
 
 if selected == 'Home':
     # ========= Latar Belakang =========
@@ -160,10 +167,9 @@ elif selected == 'Data Collecting':
     '''
     st.markdown(process)
 
-    # ========= Data Collecting Process =========
+    # ========= Dataset Preview =========
     st.markdown('<h2>Dataset Preview</h2>', unsafe_allow_html=True)
 
-    df = pd.read_csv('data/metacritic_scrap.csv')
     st.table(df.head(5))
 
     cols = df.columns
@@ -206,6 +212,80 @@ elif selected == 'Data Collecting':
     '''
     st.markdown(dataset_detail, unsafe_allow_html=True)
 
+elif selected == 'Data Preview':
+    df['id'] = df['id'].astype('object')
+    df['release_date'] = pd.to_datetime(df['release_date'])
+    df['is_online'] = df['is_online'].astype('object')
+
+    numerik = ["metascore", "metascore_review", "userscore", "userscore_review"]
+    kategorik = ["platform", "genre", "rating", "is_online"]
+
+    # density plot untuk kolom kolom numerik
+
+    st.subheader('Bentuk distribusi value dari kolom numerik pada dataset')
+    col1, col2 = st.columns(2)
+    features = numerik
+    with col1:
+        fig = plt.figure(figsize=(12,6))
+        sns.kdeplot(x=df[features[0]], color='skyblue')
+        plt.xlabel(features[0])
+        plt.tight_layout()
+        st.pyplot(fig, use_container_width=True)
+    with col2:
+        fig = plt.figure(figsize=(12,6))
+        sns.kdeplot(x=df[features[1]], color='skyblue')
+        plt.xlabel(features[1])
+        plt.tight_layout()
+        st.pyplot(fig, use_container_width=True)
+
+    col1, col2 = st.columns(2)
+    with col1:
+        fig = plt.figure(figsize=(12,6))
+        sns.kdeplot(x=df[features[2]], color='skyblue')
+        plt.xlabel(features[2])
+        plt.tight_layout()
+        st.pyplot(fig, use_container_width=True)
+    with col2:
+        fig = plt.figure(figsize=(12,6))
+        sns.kdeplot(x=df[features[3]], color='skyblue')
+        plt.xlabel(features[3])
+        plt.tight_layout()
+        st.pyplot(fig, use_container_width=True)
+
+    desc = '''
+        Grafik Kplot di atas menunjukkan bahwa sebagian besar kolom numerik tidak terdistribusi normal. Untuk bagian userscore, cukup banyak yang bernilai 0 karena memang game tersebut belum memiliki skor review.
+    '''
+    st.markdown(desc)
+
+    st.subheader('Distribusi value dari kolom numerik pada dataset secara detail')
+    col1, col2 = st.columns(2)
+    with col1:
+        fig = plt.figure(figsize=(10, 4))
+        sns.boxplot(data=df, x="metascore")
+        st.pyplot(fig, use_container_width=True)
+    with col2:
+        fig = plt.figure(figsize=(10, 4))
+        sns.boxplot(data=df, x="userscore")
+        st.pyplot(fig, use_container_width=True) 
+
+    col1, col2 = st.columns(2)
+    with col1:
+        fig = plt.figure(figsize=(10, 4))
+        sns.boxplot(data=df, x="metascore_review")
+        st.pyplot(fig, use_container_width=True)
+    with col2:
+        fig = plt.figure(figsize=(10, 4))
+        sns.boxplot(data=df, x="userscore_review")
+        st.pyplot(fig, use_container_width=True) 
+
+    desc = '''
+        Grafik Boxplot di atas menunjukkan bahwa terdapat ketidaknormalan dalam kolom userscore_review (jumlah pengguna yang memberi review game), dimana terdapar lonjakan jumlah reviewer pada game-game tertentu.
+    '''
+    st.markdown(desc)
+
+    st.table(df.describe())
+    st.table(df[df['userscore_review'] == 33344])
+    st.markdown('Pada tabel di atas, terlihat bahwa lonjakan yang sangat besar itu terjadi pada kolom userscore_review yang bernilai 33344. Setelah ditelusuri ternyata itu adalah userscore_review untuk game **Cyberpunk 2077**.')
 
 elif selected == 'Analysis':
 
