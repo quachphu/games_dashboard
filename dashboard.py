@@ -12,8 +12,8 @@ import altair as alt
 import pandas as pd
 from PIL import Image
 from streamlit_option_menu import option_menu
-import seaborn as sns
-import matplotlib.pyplot as plt
+# import seaborn as sns
+# import matplotlib.pyplot as plt
 
 st.set_page_config(
     page_title='PC: Platform Terpopuler Perilisan Game Sepanjang Masa',
@@ -22,7 +22,7 @@ st.set_page_config(
 
 selected = option_menu(
     None, 
-    ["Home", "Data Collecting",  "Data Preview", 'Analysis'], 
+    ["Home", "Data Collecting", 'Analysis'], 
     icons=['house', 'arrows-angle-contract', "eye", 'graph-up'], 
     menu_icon="cast", default_index=0, orientation="horizontal",
     styles={
@@ -50,9 +50,8 @@ if selected == 'Home':
         Saat ini, terdapat beragam jenis platform yang tersedia untuk bermain game, termasuk PC, PlayStation, Nintendo Switch, XBOX, dan berbagai platform lainnya. Meskipun sebagian besar platform tersebut membutuhkan konsol gaming yang sederhana dan mudah digenggam, platform PC tetap menjadi pilihan yang populer bagi mayoritas pengguna dalam bermain game. Hal ini dapat dijelaskan oleh keunggulan yang dimiliki oleh PC itu sendiri. Berikut ini adalah beberapa alasan yang mendasari mengapa banyak orang lebih memilih menggunakan PC daripada konsol gaming.\n
         1. Hardware pada PC mudah untuk **_dikustomisasi_**. Misalnya, pengguna dapat mengupgrade komponen perangkat dengan mudah, seperti GPU, RAM, SSD guna meningkatkan performa perangkat agar sesuai dengan requirement terbaru game, tanpa perlu membeli perangkat baru.
         2. **_Kendali game_** lebih nyaman menggunakan keyboard dan mouse. Misalnya, game tembak-tembakan lebih nyaman dimainkan menggunakan keyboard dan mouse. Bahkan pada game lain, pengguna dapat menambahkan joystick sendiri jika diperlukan.
-        3. Pengguna dapat **_menambahkan mod_** pada game untuk memperoleh pengalaman yang lebih menarik dari bermain game tersebut.
-        4. PC memliki banyak game yang dimainkan, bahkan banyak **_game gratis_** resmi yang dapat dimainkan di PC.
-        5. PC menawarkan **_fungsional yang beragam_**. Selain untuk bermain game, PC juga dapat membantu menyelesaikan pekerjaan seperti menulis dokumen.
+        3. PC memliki banyak game yang dimainkan, bahkan banyak **_game gratis_** resmi yang dapat dimainkan di PC.
+        4. PC menawarkan **_fungsional yang beragam_**. Selain untuk bermain game, PC juga dapat membantu menyelesaikan pekerjaan seperti menulis dokumen.
 
         Berikut hasil survei yang menunjukkan alasan seseorang menggunakan PC untuk bermain game:
     '''
@@ -212,80 +211,80 @@ elif selected == 'Data Collecting':
     '''
     st.markdown(dataset_detail, unsafe_allow_html=True)
 
-elif selected == 'Data Preview':
-    df['id'] = df['id'].astype('object')
-    df['release_date'] = pd.to_datetime(df['release_date'])
-    df['is_online'] = df['is_online'].astype('object')
+# elif selected == 'Data Preview':
+#     df['id'] = df['id'].astype('object')
+#     df['release_date'] = pd.to_datetime(df['release_date'])
+#     df['is_online'] = df['is_online'].astype('object')
 
-    numerik = ["metascore", "metascore_review", "userscore", "userscore_review"]
-    kategorik = ["platform", "genre", "rating", "is_online"]
+#     numerik = ["metascore", "metascore_review", "userscore", "userscore_review"]
+#     kategorik = ["platform", "genre", "rating", "is_online"]
 
-    # density plot untuk kolom kolom numerik
+#     # density plot untuk kolom kolom numerik
 
-    st.subheader('Bentuk distribusi value dari kolom numerik pada dataset')
-    col1, col2 = st.columns(2)
-    features = numerik
-    with col1:
-        fig = plt.figure(figsize=(12,6))
-        sns.kdeplot(x=df[features[0]], color='skyblue')
-        plt.xlabel(features[0])
-        plt.tight_layout()
-        st.pyplot(fig, use_container_width=True)
-    with col2:
-        fig = plt.figure(figsize=(12,6))
-        sns.kdeplot(x=df[features[1]], color='skyblue')
-        plt.xlabel(features[1])
-        plt.tight_layout()
-        st.pyplot(fig, use_container_width=True)
+#     st.subheader('Bentuk distribusi value dari kolom numerik pada dataset')
+#     col1, col2 = st.columns(2)
+#     features = numerik
+#     with col1:
+#         fig = plt.figure(figsize=(12,6))
+#         sns.kdeplot(x=df[features[0]], color='skyblue')
+#         plt.xlabel(features[0])
+#         plt.tight_layout()
+#         st.pyplot(fig, use_container_width=True)
+#     with col2:
+#         fig = plt.figure(figsize=(12,6))
+#         sns.kdeplot(x=df[features[1]], color='skyblue')
+#         plt.xlabel(features[1])
+#         plt.tight_layout()
+#         st.pyplot(fig, use_container_width=True)
 
-    col1, col2 = st.columns(2)
-    with col1:
-        fig = plt.figure(figsize=(12,6))
-        sns.kdeplot(x=df[features[2]], color='skyblue')
-        plt.xlabel(features[2])
-        plt.tight_layout()
-        st.pyplot(fig, use_container_width=True)
-    with col2:
-        fig = plt.figure(figsize=(12,6))
-        sns.kdeplot(x=df[features[3]], color='skyblue')
-        plt.xlabel(features[3])
-        plt.tight_layout()
-        st.pyplot(fig, use_container_width=True)
+#     col1, col2 = st.columns(2)
+#     with col1:
+#         fig = plt.figure(figsize=(12,6))
+#         sns.kdeplot(x=df[features[2]], color='skyblue')
+#         plt.xlabel(features[2])
+#         plt.tight_layout()
+#         st.pyplot(fig, use_container_width=True)
+#     with col2:
+#         fig = plt.figure(figsize=(12,6))
+#         sns.kdeplot(x=df[features[3]], color='skyblue')
+#         plt.xlabel(features[3])
+#         plt.tight_layout()
+#         st.pyplot(fig, use_container_width=True)
 
-    desc = '''
-        Grafik Kplot di atas menunjukkan bahwa sebagian besar kolom numerik tidak terdistribusi normal. Untuk bagian userscore, cukup banyak yang bernilai 0 karena memang game tersebut belum memiliki skor review.
-    '''
-    st.markdown(desc)
+#     desc = '''
+#         Grafik Kplot di atas menunjukkan bahwa sebagian besar kolom numerik tidak terdistribusi normal. Untuk bagian userscore, cukup banyak yang bernilai 0 karena memang game tersebut belum memiliki skor review.
+#     '''
+#     st.markdown(desc)
 
-    st.subheader('Distribusi value dari kolom numerik pada dataset secara detail')
-    col1, col2 = st.columns(2)
-    with col1:
-        fig = plt.figure(figsize=(10, 4))
-        sns.boxplot(data=df, x="metascore")
-        st.pyplot(fig, use_container_width=True)
-    with col2:
-        fig = plt.figure(figsize=(10, 4))
-        sns.boxplot(data=df, x="userscore")
-        st.pyplot(fig, use_container_width=True) 
+#     st.subheader('Distribusi value dari kolom numerik pada dataset secara detail')
+#     col1, col2 = st.columns(2)
+#     with col1:
+#         fig = plt.figure(figsize=(10, 4))
+#         sns.boxplot(data=df, x="metascore")
+#         st.pyplot(fig, use_container_width=True)
+#     with col2:
+#         fig = plt.figure(figsize=(10, 4))
+#         sns.boxplot(data=df, x="userscore")
+#         st.pyplot(fig, use_container_width=True) 
 
-    col1, col2 = st.columns(2)
-    with col1:
-        fig = plt.figure(figsize=(10, 4))
-        sns.boxplot(data=df, x="metascore_review")
-        st.pyplot(fig, use_container_width=True)
-    with col2:
-        fig = plt.figure(figsize=(10, 4))
-        sns.boxplot(data=df, x="userscore_review")
-        st.pyplot(fig, use_container_width=True) 
+#     col1, col2 = st.columns(2)
+#     with col1:
+#         fig = plt.figure(figsize=(10, 4))
+#         sns.boxplot(data=df, x="metascore_review")
+#         st.pyplot(fig, use_container_width=True)
+#     with col2:
+#         fig = plt.figure(figsize=(10, 4))
+#         sns.boxplot(data=df, x="userscore_review")
+#         st.pyplot(fig, use_container_width=True) 
 
-    desc = '''
-        Grafik Boxplot di atas menunjukkan bahwa terdapat ketidaknormalan dalam kolom userscore_review (jumlah pengguna yang memberi review game), dimana terdapar lonjakan jumlah reviewer pada game-game tertentu.
-    '''
-    st.markdown(desc)
+#     desc = '''
+#         Grafik Boxplot di atas menunjukkan bahwa terdapat ketidaknormalan dalam kolom userscore_review (jumlah pengguna yang memberi review game), dimana terdapar lonjakan jumlah reviewer pada game-game tertentu.
+#     '''
+#     st.markdown(desc)
 
-    st.table(df.describe())
-    st.table(df[df['userscore_review'] == 33344])
-    st.markdown('Pada tabel di atas, terlihat bahwa lonjakan yang sangat besar itu terjadi pada kolom userscore_review yang bernilai 33344. Setelah ditelusuri ternyata itu adalah userscore_review untuk game **Cyberpunk 2077**.')
+#     st.table(df.describe())
+#     st.table(df[df['userscore_review'] == 33344])
+#     st.markdown('Pada tabel di atas, terlihat bahwa lonjakan yang sangat besar itu terjadi pada kolom userscore_review yang bernilai 33344. Setelah ditelusuri ternyata itu adalah userscore_review untuk game **Cyberpunk 2077**.')
 
 elif selected == 'Analysis':
 
@@ -349,12 +348,13 @@ elif selected == 'Analysis':
 
     # Group data by year and platform, count the number of games
     df_platform_count = df.groupby(['release_year', 'platform']).size().reset_index(name='game_count')
+    df_platform_count
     # Get the top 3 platforms for each year
     df_top_platforms = df_platform_count.groupby('release_year').apply(lambda x: x.nlargest(3, 'game_count')).reset_index(drop=True)
 
     chart = alt.Chart(df_top_platforms[(df_top_platforms['release_year'] > 2022-5) & (df_top_platforms['release_year'] < 2023)]).mark_bar().encode(
         x=alt.X('release_year:O', title='Tahun Rilis'),
-        y=alt.Y('game_count:Q', title='Jumlah Game yang Dirilis'),
+        y=alt.Y('game_count:Q', title='Jumlah Game yang Dirilis', sort=alt.SortField(field='game_count:Q', order='descending')),
         color='platform:N',
         tooltip=['release_year:O', 'platform:N', 'game_count:Q']
     ).properties(

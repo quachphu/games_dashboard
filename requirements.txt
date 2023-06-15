@@ -4,5 +4,3 @@ numpy
 pandas
 streamlit
 streamlit-option-menu
-matplotlib
-seaborn
