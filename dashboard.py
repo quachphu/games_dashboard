@@ -123,7 +123,7 @@ if selected == 'Home':
         1. Apakah orang memilih PC untuk bermain game karena PC memiliki banyak game online?
         2. Apakah orang memilih PC untuk bermain game karena game PC sering terlebih dahulu dirilis daripada game pada konsol gaming?
         3. Jika game di rilis di beberapa platform sekaligus, apakah skor ulasan (metascore & userscore) game yang dirilis di PC lebih tinggi daripada platform lain?
-        4. Apa platform yang paling sering dipakai untu kmerilis game dalam 5 tahun ke belakang?
+        4. Apa platform yang paling sering dipakai untuk merilis game dalam 5 tahun ke belakang?
         5. Berapa nilai rata-rata skor ulasan (metascore) game untuk setiap platform? 
     '''
     st.markdown(rumusan)
@@ -348,7 +348,6 @@ elif selected == 'Analysis':
 
     # Group data by year and platform, count the number of games
     df_platform_count = df.groupby(['release_year', 'platform']).size().reset_index(name='game_count')
-    df_platform_count
     # Get the top 3 platforms for each year
     df_top_platforms = df_platform_count.groupby('release_year').apply(lambda x: x.nlargest(3, 'game_count')).reset_index(drop=True)
 
