@@ -120,7 +120,7 @@ if selected == 'Home':
     st.markdown('<h2>Rumusan Masalah</h2>', unsafe_allow_html=True)
     
     rumusan = '''
-        1. Apa platform yang paling sering dipakai untuk merilis game dalam 5 tahun ke belakang?
+        1. Apa platform yang paling spopuler untuk merilis game dalam 5 tahun ke belakang?
         2. Seberapa banyak game online yang ada di PC?
         3. Berapa nilai rata-rata skor ulasan (metascore) game untuk setiap platform? 
     '''
