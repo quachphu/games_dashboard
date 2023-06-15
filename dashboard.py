@@ -10,6 +10,7 @@ else:
 import streamlit as st
 import altair as alt
 import pandas as pd
+from PIL import Image
 from streamlit_option_menu import option_menu
 
 st.set_page_config(
@@ -19,7 +20,7 @@ st.set_page_config(
 
 selected = option_menu(
     None, 
-    ["Background", "Data Collecting",  "Data Overview", 'Analysis'], 
+    ["Home", "Data Collecting",  "Data Overview", 'Analysis'], 
     icons=['house', 'arrows-angle-contract', "eye", 'graph-up'], 
     menu_icon="cast", default_index=0, orientation="horizontal",
     styles={
@@ -35,26 +36,60 @@ st.markdown("<h6 style='text-align: center; color: grey;'>Data Source: Metascrap
 
 "\n\n"
 
-if selected == 'Background':
-    background = '''
+if selected == 'Home':
+    # ========= Latar Belakang =========
+    st.markdown('<h2>Latar Belakang</h2>', unsafe_allow_html=True)
+    background_pc = '''
         Saat ini, terdapat beragam jenis platform yang tersedia untuk bermain game, termasuk PC, PlayStation, Nintendo Switch, XBOX, dan berbagai platform lainnya. Meskipun sebagian besar platform tersebut membutuhkan konsol gaming yang sederhana dan mudah digenggam, platform PC tetap menjadi pilihan yang populer bagi mayoritas pengguna dalam bermain game. Hal ini dapat dijelaskan oleh keunggulan yang dimiliki oleh PC itu sendiri. Berikut ini adalah beberapa alasan yang mendasari mengapa banyak orang lebih memilih menggunakan PC daripada konsol gaming.\n
         1. Hardware pada PC mudah untuk **_dikustomisasi_**. Misalnya, pengguna dapat mengupgrade komponen perangkat dengan mudah, seperti GPU, RAM, SSD guna meningkatkan performa perangkat agar sesuai dengan requirement terbaru game, tanpa perlu membeli perangkat baru.
         2. **_Kendali game_** lebih nyaman menggunakan keyboard dan mouse. Misalnya, game tembak-tembakan lebih nyaman dimainkan menggunakan keyboard dan mouse. Bahkan pada game lain, pengguna dapat menambahkan joystick sendiri jika diperlukan.
         3. Pengguna dapat **_menambahkan mod_** pada game untuk memperoleh pengalaman yang lebih menarik dari bermain game tersebut.
-        4. Banyak **_game gratis_** yang resmi untuk dimainkan di PC.
+        4. PC memliki banyak game yang dimainkan, bahkan banyak **_game gratis_** resmi yang dapat dimainkan di PC.
         5. PC menawarkan **_fungsional yang beragam_**. Selain untuk bermain game, PC juga dapat membantu menyelesaikan pekerjaan seperti menulis dokumen.
 
-        Sedangkan, keunggulan dari konsol gaming yang membuatnya tidak kalah populer adalah:
+        Berikut hasil survei yang menunjukkan alasan seseorang menggunakan PC untuk bermain game:
+    '''
+    st.markdown(background_pc)
+
+    col1, col2, col3 = st.columns([1,2.75,1])
+
+    with col1:
+        st.write("")
+
+    with col2:
+        image = Image.open('img/pc-over-console.png')
+        st.image(image, 'Alasan Seseorang Lebih Memilih PC daripada Konsol Gaming\n(Source: Business Insider)', width=800)
+
+    with col3:
+        st.write("")
+
+    background_console = '''
+        Sedangkan, alasan seseorang menginginkan konsol gaming adalah sebagai berikut:
         1. Pengguna tidak perlu memeriksa kesesuaian **_spek hardware_** dengan requirement game.
         2. Dapat dimainkan dengan **_posisi yang fleksibel_**, seperti dalam keadaan duduk di sofa.
         3. Konsol gaming saat ini telah dilengkapi dengan **_fitur hiburan_** lain seperti pemutar TV, musik, gambar, dan fitur-fitur lainnya.
-        4. Terkadang game tertentu hanya dirilis secara **_eksklusif_** untuk platform yang menggunakan konsol gaming, bukan PC.
-        5. Umumnya harga konsol gaming **_lebih murah_** daripada PC yang diperuntukkan untuk gaming.
+        4. Umumnya harga konsol gaming **_lebih murah_** daripada PC yang diperuntukkan untuk gaming.
+
+        Meskipun demikian, jumlah PC gamers semakin mengalami kenaikan dari tahun ke tahun sebagaimana yang ditunjukkan oleh grafik berikut.
     '''
-    st.markdown(background)
+    st.markdown(background_console)
+
+    col1, col2, col3 = st.columns([1,2.75,1])
+
+    with col1:
+        st.write("")
+
+    with col2:
+        image = Image.open('img/num-of-pc-gamers.png')
+        st.image(image, 'Tren Kenaikan Jumlah PC Gamers (Source: Statista)', width=800)
+
+    with col3:
+        st.write("")
+
 
     "\n\n"
 
+    # ========= Hipotesis =========
     hipotesis = """
         <div style='
             display: grid;
@@ -63,7 +98,7 @@ if selected == 'Background':
             margin: 0 15% 50px;
             align-items: center;'>
             <h2 style='text-align: center; margin: 0 0 10px 0; padding: 0;'>Hipotesis</h2>
-            <p style='text-align: center; margin:0px; padding:0px;'><i>Berdasarkan fenomena kepopuleran platform PC untuk bermain game ini, berikut hipotesis yang ingin dibuktikan:</i></p>
+            <p style='text-align: center; margin:0px; padding:0px;'><i>Maka dari itu, berdasarkan fenomena kepopuleran platform PC untuk bermain game ini, berikut hipotesis yang ingin dibuktikan:</i></p>
             <p style='text-align: center; font-size: 20px; font-weight: bold; margin:0px; padding:0px;'>\"Semakin hari, jumlah game yang dirilis pada platform PC akan semakin meningkat.\"</p>
         </div>
     """
@@ -75,13 +110,106 @@ if selected == 'Background':
     '''
     st.markdown(transition)
 
+    # ========= Rumusan Masalah =========
+    st.markdown('<h2>Rumusan Masalah</h2>', unsafe_allow_html=True)
+    
     rumusan = '''
-
+        1. Apakah orang memilih PC untuk bermain game karena PC memiliki banyak game online?
+        2. Apakah orang memilih PC untuk bermain game karena game PC sering terlebih dahulu dirilis daripada game pada konsol gaming?
+        3. Jika game di rilis di beberapa platform sekaligus, apakah skor ulasan (metascore & userscore) game yang dirilis di PC lebih tinggi daripada platform lain?
+        4. Apa platform yang paling sering dipakai untu kmerilis game dalam 5 tahun ke belakang?
+        5. Berapa nilai rata-rata skor ulasan (metascore) game untuk setiap platform? 
     '''
+    st.markdown(rumusan)
+
+    # ========= Batasan Masalah =========
+    st.markdown('<h2>Batasan Masalah</h2>', unsafe_allow_html=True)
+    batasan = '''
+        1. Data yang akan dianalisis dalam project ini adalah data hasil scrap pada web Metacritic dalam rentang tahun 1994-2023.
+        2. Proses scraping berlangsung tanggal 9-11 Juni 2023.
+        3. URL yang discrap ada 2 macam, yaitu:
+            - URL yang menampilkan list game berdasarkan genre (https://www.metacritic.com/browse/games/genre/date/action/all?view=detailed)
+            - URL detail dari setiap game yang terdapat pada halaman list game (contoh: https://www.metacritic.com/game/pc/cyberpunk-2077/details)
+    '''
+    st.markdown(batasan)
+
+elif selected == 'Data Collecting':
+    # ========= Data Collecting Process =========
+    st.markdown('<h2>Data Collecting Process</h2>', unsafe_allow_html=True)
+    
+    col1, col2, col3 = st.columns([1,2.75,1])
+
+    with col1:
+        st.write("")
+
+    with col2:
+        image = Image.open('img/data-collection-process.png')
+        st.image(image, caption='Proses Data Collecting Situs Web Metacritic', width=800)
+
+    with col3:
+        st.write("")
+
+    process = '''
+        Berikut process dari data collection yang dilakukan:
+        1. Melakukan scrap halaman web menggunakan library BeautifulSoup
+        2. Menyimpan hasil scrap masing-masing genre ke dalam bentuk dataframe menggunakan library Pandas
+        3. Menggabungkan berbagai berbagai dataframe untuk masing-masing genre menjadi 1 buah dataframe, yang terdiri dari 1 dataframe Game List dan 1 dataframe Game Detail.
+        4. Membersihkan setiap dataframe tersebut, di antaranya dengan mengisi kolom yang bernilai null, mengubah tipe data, menghapus string yang memuat spasi berlebih, dan lain-lain.
+        5. Menggabungkan dataframe Game List dan Detail List menjadi 1 dataframe gabungan dan menseleksi kolom yang diperlukan menggunakan SQL join.
+        6. Menyimpan hasilnya dalam bentuk CSV.
+    '''
+    st.markdown(process)
+
+    # ========= Data Collecting Process =========
+    st.markdown('<h2>Dataset Preview</h2>', unsafe_allow_html=True)
+
+    df = pd.read_csv('data/metacritic_scrap.csv')
+    st.table(df.head(5))
+
+    cols = df.columns
+    desc = {
+        'id': 'Penanda unik setiap game per platform',
+        'title': 'Judul game',
+        'platform': 'Platform perilisan game',
+        'release_date': 'Tanggal rilis game',
+        'genre': 'Genre dari game',
+        'publisher': 'Nama perusahaan publisher game',
+        'rating': 'Klasifikasi audience pemain game',
+        'metascore': 'Skor ulasan game menurut kritikus game',
+        'metascore_review': 'Jumlah kritikus game yang memberi skor ulasan',
+        'userscore': 'Skor ulasan game menurut pengguna biasa metacritic/gamers',
+        'userscore_review': 'Jumlah pengguna biasa metacritic/gamers yang memberi skor ulasan',
+        'is_online': 'Bernilai 1 jika game adalah game online, bernilai 0 jika game adalah game offline'
+    }
+    cols_data = ''
+    for i in cols:
+        cols_data += '''
+            <tr>
+                <td>'''+ str(i) +'''</td>
+                <td>'''+ str(desc[i]) +'''</td>
+            </tr>'''
+
+    dataset_detail = '''
+        <h3 style='text-align:center;'>Deskripsi Dataset</h3>
+        <div style='
+            display: grid;
+            padding: 20px 25px;
+            margin: 0 15% 50px;
+            align-items: center;'>
+            <table>
+                <tr>
+                    <th>Nama Kolom</th>
+                    <th>Deskripsi</th>
+                </tr>''' + cols_data + '''
+            </table>
+        </div>
+    '''
+    st.markdown(dataset_detail, unsafe_allow_html=True)
+
 
 elif selected == 'Analysis':
 
-    df = pd.read_csv('metacritic_scrap.csv')
+    df = pd.read_csv('data/metacritic_scrap.csv')
     df['id'] = df['id'].astype('object')
     df['release_date'] = pd.to_datetime(df['release_date'])
     df['is_online'] = df['is_online'].astype('object')
@@ -188,5 +316,5 @@ elif selected == 'Data Overview':
     st.markdown('*Metacritic merupakan suatu situs web yang memberikan informasi tentang review (ulasan) games. Situs ini menyajikan 2 jenis review, yaitu metascore dan userscore. Metascore adalah skor penilaian game yang diberikan oleh para kritikus game terpercaya, sementara Userscore adalah skor penilaian game yang diberikan oleh pengguna atau gamer itu sendiri. Dengan kombinasi kedua jenis skor tersebut, Metacritic memberikan panduan bagi para pecinta game untuk mengevaluasi dan memilih berbagai game yang ingin mereka mainkan.*')
 
 
-"\n\n"
+"\n\n\n\n"
 st.markdown("<h6 style='text-align: center; color: grey;'>By: Hikmawati Fajriah Ayu Wardana (<a href = 'mailto: hf.ayuwardana@gmail.com'>hf.ayuwardana@gmail.com</a>)</h6>", unsafe_allow_html=True)
