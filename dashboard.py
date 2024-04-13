@@ -48,9 +48,7 @@ if selected == 'Home':
     st.markdown('<h2>Latar Belakang</h2>', unsafe_allow_html=True)
     background_pc = '''
         Saat ini, terdapat beragam jenis platform yang tersedia untuk bermain game, termasuk PC, PlayStation, Nintendo Switch, XBOX, dan berbagai platform lainnya. Meskipun sebagian besar platform tersebut membutuhkan konsol gaming yang sederhana dan mudah digenggam, platform PC tetap menjadi pilihan yang populer bagi mayoritas pengguna dalam bermain game. Hal ini dapat dijelaskan oleh keunggulan yang dimiliki oleh PC itu sendiri. Berikut ini adalah beberapa alasan yang mendasari mengapa banyak orang lebih memilih menggunakan PC daripada konsol gaming.\n
-        1. Hardware pada PC mudah untuk **_dikustomisasi_**. Misalnya, pengguna dapat mengupgrade komponen perangkat dengan mudah, seperti GPU, RAM, SSD guna meningkatkan performa perangkat agar sesuai dengan requirement terbaru game, tanpa perlu membeli perangkat baru.
-        2. **_Kendali game_** lebih nyaman menggunakan keyboard dan mouse. Misalnya, game tembak-tembakan lebih nyaman dimainkan menggunakan keyboard dan mouse. Bahkan pada game lain, pengguna dapat menambahkan joystick sendiri jika diperlukan.
-        3. PC memliki banyak game yang dimainkan, bahkan banyak **_game gratis_** resmi yang dapat dimainkan di PC.
+        
         4. PC menawarkan **_fungsional yang beragam_**. Selain untuk bermain game, PC juga dapat membantu menyelesaikan pekerjaan seperti menulis dokumen.
 
         Berikut hasil survei yang menunjukkan alasan seseorang menggunakan PC untuk bermain game:
