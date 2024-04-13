@@ -355,29 +355,23 @@ elif selected == 'Analysis':
     st.caption('Terdapat variasi jumlah game yang dirilis di platform-platform tersebut selama periode 1994-2022. Terlihat bahwa pada tahun 2008-2011, jumlah game yang dirilis di XBOX berhasil mengungguli PC. Pada tahun 2010, PlayStation 3 juga berhasil menyalip PC. Selain itu, pada tahun 2010-2013, iOS berhasil mengungguli PC. Meskipun demikian, secara keseluruhan, game PC tetap mendominasi dengan jumlah perilisan game yang lebih banyak dibandingkan platform lain sepanjang masa.')
 
     '\n\n'
+
+    # Group data by year and platform, count the number of games
     df_platform_count = df.groupby(['release_year', 'platform']).size().reset_index(name='game_count')
-        # Get the top 3 platforms for each year
+    # Get the top 3 platforms for each year
     df_top_platforms = df_platform_count.groupby('release_year').apply(lambda x: x.nlargest(3, 'game_count')).reset_index(drop=True)
 
-        # Filter data for the last 5 years
-    df_filtered = df_top_platforms[(df_top_platforms['release_year'] > 2022-5) & (df_top_platforms['release_year'] < 2023)]
+    chart = alt.Chart(df_top_platforms[(df_top_platforms['release_year'] > 2022-5) & (df_top_platforms['release_year'] < 2023)]).mark_bar().encode(
+        x=alt.X('release_year:O', title='Tahun Rilis'),
+        y=alt.Y('game_count:Q', title='Jumlah Game yang Dirilis', sort=alt.SortField(field='game_count:Q', order='descending')),
+        color='platform:N',
+        tooltip=['release_year:O', 'platform:N', 'game_count:Q']
+    ).properties(
+        title='Top 3 Platform Perilisan Game dalam 5 Tahun Terakhir',
+    )
+    st.altair_chart(chart, use_container_width=True)
 
-        # Plot using Seaborn
-    plt.figure(figsize=(10, 6))
-    sns.barplot(data=df_filtered, x='release_year', y='game_count', hue='platform', 
-                    order=sorted(df_filtered['release_year'].unique()), 
-                    palette='Set2', edgecolor='black')
-
-    plt.title('Top 3 Platform Perilisan Game dalam 5 Tahun Terakhir')
-    plt.xlabel('Tahun Rilis')
-    plt.ylabel('Jumlah Game yang Dirilis')
-    plt.legend(title='Platform', bbox_to_anchor=(1.05, 1), loc='upper left')
-    plt.tight_layout()
-    plt.show()
-
-        # Add caption
     st.caption('Grafik di atas menunjukkan bahwa platform PC, PlayStation 4, PlayStation 5, dan Switch mendominasi dalam perilisan game dengan menempati posisi teratas. Perlu dicatat bahwa PlayStation 4, yang sebelumnya menjadi salah satu platform utama yang menggunakan konsol, telah digantikan oleh generasi terbarunya, yaitu PlayStation 5. Sejak tahun 2022, jumlah perilisan game untuk PlayStation 5 mulai meningkat, meskipun platform tersebut sudah dirilis sejak tahun 2020.')
-
 
     "\n\n"
 
